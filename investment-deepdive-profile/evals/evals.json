@@ -1,0 +1,31 @@
+{
+  "skill_name": "investment-deepdive-profile",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "我们是工银资本，这是我们在看的一个C轮项目「智象未来 HiDream.ai」发来的商业计划书。麻烦帮我生成一份深度分析画像，机构团队标签写「工银资本」，密级声明和格式按你熟悉的机构内部尽调报告惯例来就行，日期用材料里能看到的最新日期或今天。BP文件路径：/Users/dongtian/Desktop/日常工作/BP/2026智象未来商业计划书 - C轮 V4 - 工银资本.pdf",
+      "expected_output": "A formatted .docx investment deep-dive memo covering company overview, team, tech/product, competitive landscape, and investment judgment (positive + risk signals + open questions), branded for 工银资本, faithful to the BP's actual content and supplemented with real web research.",
+      "files": ["/Users/dongtian/Desktop/日常工作/BP/2026智象未来商业计划书 - C轮 V4 - 工银资本.pdf"],
+      "assertions": [
+        {"id": "a1", "text": "Report names the company as 智象未来 / HiDream.ai", "category": "content"},
+        {"id": "a2", "text": "Report states the company was founded in 2023.03 (or '2023年3月')", "category": "content"},
+        {"id": "a3", "text": "Report names founder/CEO 梅涛 with a specific credential (e.g. 加拿大工程院院士 / ACM/IEEE Fellow), not just a title", "category": "content"},
+        {"id": "a4", "text": "Report names CTO 姚霆", "category": "content"},
+        {"id": "a5", "text": "Report describes the core technical architecture as full-modal / UiT (全模态 / Unified Transformer), not just 'multimodal'", "category": "content"},
+        {"id": "a6", "text": "Report cites the HiDream-O1-Image benchmark result (Artificial Analysis leaderboard, China #1 / Global #2 or equivalent ranking claim) with the specific evaluation date if available", "category": "content"},
+        {"id": "a7", "text": "Report names at least two of the three commercialization products (HiBurst / 帧赞Ai(ZhenZan) / vivago) and what each targets", "category": "content"},
+        {"id": "a8", "text": "Report names at least one concrete customer or platform partner from the deck (e.g. 腾讯视频《青铜诡事录》, TikTok, SHEIN, 致欧家居/SONGMICS)", "category": "content"},
+        {"id": "a9", "text": "Report includes the revenue trajectory figures from the deck (2025 ~1亿, 2028E ~20亿, 2029-2030E 100亿+) or explicitly flags them as company projections, not verified facts", "category": "content"},
+        {"id": "a10", "text": "Report names at least two real prior investors from the deck's investor logos (e.g. 深创投, 东方富海, 商汤, 科大讯飞, 京东, 金浦投资)", "category": "content"},
+        {"id": "a11", "text": "Report does NOT invent a specific fundraise amount or valuation for this C round — the deck does not disclose one, only fund-use percentages (50/30/20)", "category": "accuracy", "note": "checks against hallucination"},
+        {"id": "a12", "text": "Report includes a competitive-landscape section naming at least 2 real external competitors researched from public sources (e.g. Kling/可灵, Seedance/字节跳动, Runway, Vidu/生数科技, Google Veo/Nano Banana, OpenAI Sora), not merely the benchmark chart labels copied verbatim", "category": "research"},
+        {"id": "a13", "text": "Report contains all fixed template sections: 公司概览与定位, 核心团队, 技术或产品底盘, 竞争格局与差异化, 投资判断, 附录", "category": "structure"},
+        {"id": "a14", "text": "Report has a distinct 风险信号 (risk signals) subsection with at least 3 concrete, non-generic risks (not just polite caveats)", "category": "structure"},
+        {"id": "a15", "text": "Report has a 核心待验证问题 (open due-diligence questions) list with specific, answerable questions (not generic 'what are your future plans')", "category": "structure"},
+        {"id": "a16", "text": "Output .docx opens without corruption and contains a cover page, a table of contents element, and at least 5 tables", "category": "format"},
+        {"id": "a17", "text": "Every page's footer/cover shows the '工银资本' branding as instructed, not a placeholder or the sample's original '工银投资' label", "category": "format"},
+        {"id": "a18", "text": "Team section ends with a synthesis judgment paragraph that names both a strength and a specific risk/open question (not pure praise)", "category": "quality"}
+      ]
+    }
+  ]
+}
