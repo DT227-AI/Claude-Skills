@@ -1,0 +1,18 @@
+{
+  "skill_name": "aic-equity-dd-report",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "帮我按我们机构的尽调报告格式，写一份关于为[标的公司]办理不超过X亿元股权投资试点业务的尽调报告。基金方案、交易要素、审计报告、征信查询结果我都放在数据房目录里了，团队签署信息我另外给你。",
+      "expected_output": "A formatted .docx due-diligence report following the fixed 7-part structure (项目方案/标的企业情况/行业分析/同业可比/投资收益测算/上市退出与风险/结论性意见), with a 声明与保证 signature page, financial tables with YoY columns, numbered risk items each paired with 应对措施, and an explicit investment recommendation in Part 7 consistent with Part 1's deal terms. No fabricated figures — gaps marked 未披露/待补充.",
+      "assertions": [
+        {"id": "a1", "text": "Report includes a 声明与保证 statement/signature page before Part 1", "category": "structure"},
+        {"id": "a2", "text": "Report has exactly 7 numbered parts (第一部分…第七部分) in the fixed order", "category": "structure"},
+        {"id": "a3", "text": "Every risk item in Part 6 has a matching 应对措施 paragraph", "category": "format"},
+        {"id": "a4", "text": "Financial tables include a same-period-YoY column when multi-year data is available", "category": "format"},
+        {"id": "a5", "text": "Any data point not present in provided materials is marked 未披露 or 待核实, not invented", "category": "no-fabrication"},
+        {"id": "a6", "text": "Part 7's recommended investment amount/valuation matches Part 1's 基本交易要素", "category": "content"}
+      ]
+    }
+  ]
+}
