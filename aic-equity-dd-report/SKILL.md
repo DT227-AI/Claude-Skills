@@ -24,6 +24,16 @@ When a data point is genuinely unavailable, write **"未披露"**, **"资料未�
 
 Before writing, build a **source map**: for each of the 7 parts below, list which provided documents or verified public sources will supply its content, and which sub-sections have no source yet. Anything with no source gets marked 未披露 in the draft rather than skipped silently — silently dropping a required sub-section reads as sloppy, not as appropriately cautious.
 
+## Depth calibration: match the reference sample's length, not a summary
+
+The reference sample this skill is built from runs to roughly **30,000+ Chinese characters of running prose** (plus tables) across the 7 parts — this is a full institutional research document, not an executive summary. A common failure mode is producing a thin, bullet-heavy draft that hits every required heading but at a fraction of that depth. `references/report_template.md` has a **per-section character-count calibration table** derived from the actual reference sample — check your draft against it before rendering, and if a section is running short, expand it the right way:
+
+- **Expand by adding granularity, not filler.** More length must come from covering more real things — every balance-sheet line item gets its own variance sentence, every team member gets their own bio paragraph, every named competitor gets a full profile, every risk gets its own numbered sub-point when the source material supports it. Never pad by restating the same fact in more words or adding generic filler sentences ("公司发展前景广阔" and similar) — that fails the no-fabrication spirit just as much as inventing a number does.
+- **The two heaviest parts are Part 2/三(财务情况) and Part 2/一(基本情况 + 公司治理).** In the reference sample these alone account for over half the document, because every account in the balance sheet/income statement/cash flow gets its own driver sentence, and every core team member gets a full-paragraph bio with named prior employers, credentials, and specific achievements — not a one-line title.
+- **Part 3(行业分析) and Part 4(同业可比分析) are the other long sections**, driven by covering every sub-topic of the technology/industry background (background → principles → classification → trends → applications → challenges, each as its own developed paragraph) and giving each named competitor a genuine multi-sentence profile (founding, location, tech route, product status, financials if public, funding history) rather than a one-line mention.
+- **Some sections are naturally short and shouldn't be padded to match** — 资信情况 (mostly confirmation of query results) and 结论性意见 (a dense, decisive closing judgment) are supposed to be compact. Depth calibration means matching the *right* sections' depth, not applying a uniform word count everywhere.
+- If the provided materials genuinely don't support the reference sample's depth for a section (e.g. a much smaller/simpler deal with less team/financial history), that's fine — say so rather than inventing detail to hit a target. But check this is actually true before assuming it; most thin drafts are thin because the model summarized available material too aggressively, not because the material was sparse.
+
 ## Before you start: gather materials and confirm scope
 
 Ask for (or inventory from what's already provided) — don't stall on all of these being present, but note gaps explicitly:
@@ -58,7 +68,9 @@ After each chapter, save it as a JSON fragment matching the `blocks` schema in `
 Part 3 (行业分析) and Part 4 (同业可比分析) lean on public information — search for the technology/industry background and each named competitor's public facts (founding date, funding history, product specs, financials if listed) and cite what you actually found. Part 5's comparable-company multiples (for IRR/valuation benchmarking) should use real listed peers with real reported figures, not invented ones — if no clean public comp exists, say so and use the closest available proxy with the caveat stated.
 
 ### 4. Integrate and self-check
-Merge the chapter fragments into one `content.json` per the schema documented at the top of `scripts/build_report_docx.py`. Before rendering, do a no-fabrication pass: for every number/name/date in the merged draft, confirm it's in your source map from Step 1 — if you can't place its source, either verify it or replace it with 未披露/待核实.
+Merge the chapter fragments into one `content.json` per the schema documented at the top of `scripts/build_report_docx.py`. Before rendering, run two passes over the merged draft:
+1. **No-fabrication pass**: for every number/name/date, confirm it's in your source map from Step 1 — if you can't place its source, either verify it or replace it with 未披露/待核实.
+2. **Depth pass**: check each part's prose length against the calibration table in `references/report_template.md`. Any part running noticeably under its reference range gets expanded by adding the missing granularity (more line items, more team bios, more competitor detail, more risk sub-points) pulled from the source materials you already have or from further web research — not by padding sentences.
 
 ### 5. Render to Word
 ```
